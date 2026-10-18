@@ -9,14 +9,12 @@ Laravel 11 API application (PHP ^8.2). Mental health app API.
 - Install dependencies: `composer install`
 - Run tests: `php artisan test`
 - Run a single test: `php artisan test --filter=TestName`
-- Lint/format: `./vendor/bin/pint`
 - Migrations: `php artisan migrate`
 - Clear cache: `php artisan optimize:clear`
 
 ## Code Style
 
 - Follow Laravel conventions and existing code style in the project.
-- Format PHP code with Laravel Pint before considering work done.
 - Use PSR-4 autoloading (`App\` → `app/`).
 - Validate request data via Form Requests; keep controllers thin.
 - Do not commit `.env` or secrets.
