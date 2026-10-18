@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,11 +17,17 @@ class Category extends Model
   protected $fillable = [
     'name',
     'slug',
+    'description',
+    'sort_order',
   ];
 
-  // Slug is auto-generated from the name unless one is provided.
+  // Categories are always returned sorted by sort_order, then name,
+  // so consumers (e.g. Flutter) just display the received order.
   protected static function booted(): void
   {
+    static::addGlobalScope('ordered', fn (Builder $query) => $query->orderBy('sort_order')->orderBy('name'));
+
+    // Slug is auto-generated from the name unless one is provided.
     static::saving(function (Category $category) {
       $category->slug = $category->slug ?: Str::slug($category->name);
     });
