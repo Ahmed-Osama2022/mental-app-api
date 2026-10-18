@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -19,12 +18,15 @@ class CategorySeeder extends Seeder
       ['name' => 'Meditation', 'description' => 'Guided meditation and mindfulness practices.'],
       ['name' => 'Sleep', 'description' => 'Tips and routines for better sleep quality.'],
       ['name' => 'Stress Management', 'description' => 'Techniques to reduce and handle daily stress.'],
+      ['name' => 'Self Esteem', 'description' => 'Build confidence and a healthier self-image.'],
+      ['name' => 'Relationships', 'description' => 'Communication skills and healthier connections.'],
+      ['name' => 'Focus & Productivity', 'description' => 'Beat procrastination and stay concentrated.'],
     ];
 
     foreach ($categories as $index => $category) {
       Category::create([
         'name' => $category['name'],
-        'slug' => Str::slug($category['name']),
+        'slug' => \Illuminate\Support\Str::slug($category['name']),
         'description' => $category['description'],
         'sort_order' => $index + 1,
       ]);
