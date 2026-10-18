@@ -3,10 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use Database\Seeders\Concerns\HasUnsplashImages;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
+  use HasUnsplashImages;
+
   /**
    * Run the database seeds.
    */
@@ -24,12 +27,14 @@ class CategorySeeder extends Seeder
     ];
 
     foreach ($categories as $index => $category) {
-      Category::create([
+      $categoryModel = Category::create([
         'name' => $category['name'],
         'slug' => \Illuminate\Support\Str::slug($category['name']),
         'description' => $category['description'],
         'sort_order' => $index + 1,
       ]);
+
+      $this->attachRandomUnsplashImages($categoryModel, 1, 1);
     }
   }
 }

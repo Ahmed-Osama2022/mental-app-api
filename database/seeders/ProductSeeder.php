@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use Database\Seeders\Concerns\HasUnsplashImages;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
+  use HasUnsplashImages;
+
   /**
    * Run the database seeds.
    */
@@ -66,12 +69,14 @@ class ProductSeeder extends Seeder
       }
 
       foreach ($products as [$name, $description]) {
-        Product::create([
+        $product = Product::create([
           'category_id' => $category->id,
           'name' => $name,
           'slug' => Str::slug($name),
           'description' => $description,
         ]);
+
+        $this->attachRandomUnsplashImages($product, 1, 3);
       }
     }
   }

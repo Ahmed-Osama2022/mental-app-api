@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
     $this->call([
       CategorySeeder::class,
       ProductSeeder::class,
-      ImageSeeder::class,
+      // ImageSeeder::class, // images are created with their category/product instead
     ]);
   }
 }
